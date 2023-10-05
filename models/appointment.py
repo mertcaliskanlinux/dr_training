@@ -1,6 +1,5 @@
 from odoo import models, fields, api, exceptions
 
-
 class Appointment(models.Model):
     _name = "dr_patients.appointment"
 
@@ -10,7 +9,7 @@ class Appointment(models.Model):
     _description = "Appointment"
 
     appointment_date_time = fields.Datetime(string="Appointment Date & Time", required=True)
-    code = fields.Char(string="Code", required=True, index=True)
+    code = fields.Char(string='code', required=True, index=True, copy=False, default=lambda self: self.env['ir.sequence'].next_by_code('dr_patients.appointment') or 'New')
     doctor_id = fields.Many2many(comodel_name="dr_patients.doctor", string="Doctor")
     patient = fields.Many2one(comodel_name="dr_patients.patient", string="Patient", required=True)
     stage = fields.Selection(
@@ -87,6 +86,14 @@ class Appointment(models.Model):
         if vals.get('code', 'New') == 'New':
             vals['code'] = self.env['ir.sequence'].next_by_code('dr_patients.appointment') or 'New'
         return super(Appointment, self).create(vals)
+
+    @api.constrains('code')
+    def _check_code_unique(self):
+        for record in self:
+            if self.env['dr_patients.appointment'].search_count([('code', '=', record.code)]) > 1:
+                raise exceptions.ValidationError('The Code must be unique.')
+
+
 
 
 
