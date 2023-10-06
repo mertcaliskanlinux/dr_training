@@ -56,26 +56,24 @@ class Appointment(models.Model):
             else:
                 appointment.treatment = False
 
-    def action_confirm(self):
+
+
+    def action_in_progress(self):
         print("BUTTON PROGRESS")
         self.stage = 'in_progress'
 
     def action_done(self):
         print("BUTTON DONE")
         self.stage = 'done'
-        context = dict(self.env.context, readonly_doctor=True)  # "Done" düğmesine tıklanınca "doctor" alanı readonly yapılır
-        self = self.with_context(context)  # Context'i güncelleyin
 
     def action_draft(self):
         print("BUTTON DRAFT")
         self.stage = 'draft'
-        context = dict(self.env.context, readonly_doctor=False)  # Özel bir context oluşturun
-        self.with_context(context)  # Context'i güncelleyin
-
 
     def action_cancel(self):
         print("BUTTON CANCEL")
         self.stage = 'cancel'
+
 
     def unlink(self):
         if self.stage == 'done':

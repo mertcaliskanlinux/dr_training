@@ -15,31 +15,22 @@
             <field name="name">dr_patients.appointment.form</field>
             <field name="model">dr_patients.appointment</field>
             <field name="arch" type="xml">
+
                 <form string="Appointment Form">
                     <header>
-                        <button name="action_confirm" string="In Progress" class="btn-primary"
-                                confirm="Are you sure that you need to confirm ?"
-                                type="object" attrs="{'invisible': [('stage', '!=', 'draft')]}"/>
 
+                        <button name="action_in_progress" string="In Progress" class="btn-primary" confirm="Are you sure that you need to confirm ?" type="object" attrs="{'invisible': [('stage', '!=', 'draft')]}"/>
 
-                        <button name="action_done"  delete="0" string="Mark As Done" class="btn-primary"
-                                type="object" attrs="{'invisible':[('stage', '!=' , 'in_progress')]}"/>
-
-
+                        <button name="action_done" delete="0" string="Mark As Done" class="btn-primary" type="object" attrs="{'invisible':[('stage', '!=' , 'in_progress')],'readonly':('stage', 'in' , 'in_progress')}"/>
 
                         <button name="action_draft" string="Set To Draft" class="btn-primary"
-                                type="object"
-                                attrs="{'invisible': [('stage', 'not in', ('in_progress', 'done'))],
-                                       'readonly': [('stage', 'in', ('done', 'cancel'))]}"/>
-
-
-
-                        <button name="action_cancel" string="Cancel"
+                                type="object" attrs="{'invisible': [('stage', '!=', 'in_progress'),('stage', '!=', 'done')]}"/>
+                        <button name="action_cancel" string="Cancel" class="btn-primary"
                                 confirm="Are you sure that you need to cancel ?"
                                 type="object" attrs="{'invisible': [('stage', '=', 'cancel')]}"/>
 
 
-                        <field name="stage" widget="statusbar" statusbar_visible="draft,done,confirm"/>
+                        <field name="stage" widget="statusbar" statusbar_visible="draft,done,confirm,cancel"/>
 
                     </header>
                     <sheet>
@@ -80,12 +71,10 @@
                     <field name="doctor_full_name" string="Doctor Name"/>
 
                     <field name="appointment_date_time" string="Appointment"/>
-                    
+
                     <field name="patient_full_name" string="Patient Name"/>
 
-
-
-                    <field name="stage" widget="statusbar" statusbar_visible="draft,done,confirm"/>
+                    <field name="stage" />
 
                 </tree>
             </field>
@@ -95,34 +84,35 @@
 
 
 
-    <record id="action_dr_training_appointment" model="ir.actions.act_window">
 
-        <field name="name">Appointment</field>
+
+    <record id="action_dr_training_appointments" model="ir.actions.act_window">
+        <field name="name">Appointments</field>
         <field name="type">ir.actions.act_window</field>
+        <field name="res_model">dr_patients.appointment</field>
         <field name="view_mode">tree,form</field>
-        <field name="context">{}</field>
 
     </record>
 
 
-    
 
 
-    
+
+
 
     <menuitem id="menu_appointment_root"
         name="Appointment"
-        parent="menu_dr_training_root"
+        parent="menu_appointment_master"
         sequence="10"/>
 
 
 
     <menuitem id="menu_appointment"
-             name="Appointment of Departments"
-             action="action_dr_training_appointment"
-             parent="menu_appointment_root"
-             sequence="10"
-             />
+         name="Appointment of Departments"
+         action="action_dr_training_appointments"
+         parent="menu_appointment_root"
+         sequence="10"
+         />
 
 
 </odoo>

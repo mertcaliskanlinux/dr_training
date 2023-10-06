@@ -11,7 +11,7 @@ class Doctor(models.Model):
 
     first_name = fields.Char(string="First Name", required=True)
     last_name = fields.Char(string="Last Name", required=True)
-    full_name = fields.Char(string="Full Name",)
+    full_name = fields.Char(string="Full Name",store=True, compute="_onchange_full_name")
     date_of_birth = fields.Date(string="Date of Birth", required=True)
     age = fields.Integer(string="Age", readonly=True, compute="_compute_age")
     phone = fields.Char(string="Phone", required=True)
@@ -25,6 +25,14 @@ class Doctor(models.Model):
         for rec in self:
             if self.search_count([('email', '=', rec.email)]) > 1:
                 raise exceptions.ValidationError("Email address must be unique.")
+
+    @api.depends('first_name', 'last_name')
+    def _onchange_full_name(self):
+        for rec in self:
+            if rec.first_name and rec.last_name:
+                rec.full_name = rec.first_name + ' ' + rec.last_name # eğer isim ve soyisim dolu ise full_name alanını doldur
+            else:
+                rec.full_name = "" # eğer isim ve soyisim boş ise full_name alanını boş bırak
             
 
     @api.depends('date_of_birth')
