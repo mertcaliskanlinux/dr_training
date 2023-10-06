@@ -3,19 +3,7 @@
 
 <odoo>
 
-<!--    <record id="doctor_tree" model="ir.ui.view">-->
-<!--            <field name="name">dr_patients.doctor.tree</field>-->
-<!--            <field name="model">dr_patients.doctor</field>-->
-<!--            <field name="arch" type="xml">-->
-<!--                <tree>-->
-<!--                    <field name="full_name"/>-->
-<!--                    <field name="department"/>-->
-<!--                    <field name="age"/>-->
 
-
-<!--                </tree>-->
-<!--            </field>-->
-<!--    </record>-->
 
     <record id="view_doctor_kanban" model="ir.ui.view">
         <field name="name">dr_patients.doctor.kanban</field>

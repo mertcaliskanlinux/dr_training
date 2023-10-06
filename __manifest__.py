@@ -8,7 +8,7 @@
     'sequence': -100,
     'summary': """Doctor Management Mert Ç.""",
     'description': "",
-    'depends': [],
+    'depends': ['sale'],
     'data': [
         'security/ir.model.access.csv',
         'views/menu.xml',
@@ -18,6 +18,7 @@
         'views/appointment_view.xml',
         'views/treatment_view.xml',
         'views/wizard_view.xml',
+        'views/sale_view.xml',
     ],
     'application': True,
     'auto_install': False,

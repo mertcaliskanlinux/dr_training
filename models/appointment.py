@@ -12,13 +12,7 @@ class Appointment(models.Model):
     code = fields.Char(string='code', required=True, index=True, copy=False, default=lambda self: self.env['ir.sequence'].next_by_code('dr_patients.appointment') or 'New')
     doctor_id = fields.Many2many(comodel_name="dr_patients.doctor", string="Doctor")
     patient = fields.Many2one(comodel_name="dr_patients.patient", string="Patient", required=True)
-    stage = fields.Selection(
-        string="Stage",
-        selection=[('draft', 'Draft'),('in_progress', 'In Progress'), ('done', 'Done'),
-                   ('cancel', 'Cancel')],
-        default='draft',
-        required=True
-    )
+    stage = fields.Selection(string="Stage",selection=[('draft', 'Draft'),('in_progress', 'In Progress'), ('done', 'Done'),('cancel', 'Cancel')],default='draft',required=True)
     treatment = fields.One2many('dr_patients.treatment', 'appointment', string='Treatments')
     patient_full_name = fields.Char(string="Patient Name", compute="_compute_patient_full_name", store=True)
     doctor_full_name = fields.Char(string="Doctor Name", compute="_compute_doctor_full_name", store=True)
@@ -79,6 +73,7 @@ class Appointment(models.Model):
         if self.stage == 'done':
             raise exceptions.ValidationError("You cannot delete a done appointment")
         return super(Appointment, self).unlink()
+    
     @api.model
     def create(self, vals):
         if vals.get('code', 'New') == 'New':

@@ -6,13 +6,10 @@
         sequence="0"/>
 
 
-
-
     <menuitem id="menu_doctor_master" 
         name="Doctors" 
         parent="menu_dr_training_root" 
         sequence="10"/>
-
 
     <menuitem id="menu_department_master" 
         name="Departments" 
@@ -25,9 +22,16 @@
         sequence="10"/>
 
     <menuitem id="menu_appointment_master" 
-        name="Appointment" 
+        name="Appointment"
         parent="menu_dr_training_root" 
         sequence="10"/>
+
+    <menuitem id="menu_sale_master"
+        name="Sale"
+        parent="menu_dr_training_root"
+        sequence="10"/>
+
+
 
     <menuitem id="menu_treatment_master" 
         name="Treatment" 

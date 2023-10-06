@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Sale Order View -->
+        <record id="view_my_custom_sale_order_form" model="ir.ui.view">
+            <field name="name">my.custom.sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <form string="My Custom Sale Order Form">
+                    <sheet>
+
+                        <group>
+                            <field name="doctor_fee"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -5,8 +5,7 @@ access.dr_patients.patient,access.dr_patients.patient,model_dr_patients_patient,
 access.dr_patients.appointment,access.dr_patients.appointment,model_dr_patients_appointment,base.group_user,1,1,1,1
 access.dr_patients.treatment,access.dr_patients.treatment,model_dr_patients_treatment,base.group_user,1,1,1,1
 access.dr_patients.wizard,access.dr_patients.wizard,model_dr_patients_appointment_wizard,base.group_user,1,1,1,1
-
-
+access.sale.order,access.sale.order,model_sale_order,base.group_user,1,1,1,1
 
 
 
