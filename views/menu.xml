@@ -26,11 +26,6 @@
         parent="menu_dr_training_root" 
         sequence="10"/>
 
-    <menuitem id="menu_sale_master"
-        name="Sale"
-        parent="menu_dr_training_root"
-        sequence="10"/>
-
 
 
     <menuitem id="menu_treatment_master" 
@@ -42,7 +37,13 @@
         name="Wizard"
         parent="menu_dr_training_root"
         sequence="10"/>
-  
+
+
+
+
+
+
+
 
    
 

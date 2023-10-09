@@ -10,7 +10,7 @@
             <field name="arch" type="xml">
 
                 <form string="Appointment Form">
-                
+
                     <header>
 
                         <button name="action_in_progress" string="In Progress" class="btn-primary" confirm="Are you sure that you need to confirm ?" type="object" attrs="{'invisible': [('stage', '!=', 'draft')]}"/>
@@ -24,16 +24,18 @@
                                 type="object" attrs="{'invisible': [('stage', '=', 'cancel')]}"/>
 
 
+
                         <field name="stage" widget="statusbar" statusbar_visible="draft,done,confirm,cancel"/>
 
                     </header>
                     <sheet>
                         <group>
+                            <button name="action_sale_order" string="Create Sale Order" type="object" class="oe_highlight" />
+
                             <field name="code"/>
                             <field name="appointment_date_time"/>
                             <field name="doctor_id" widget="many2many_tags" attrs="{'readonly': [('stage', 'in', ['done', 'cancel'])]}"/>
                             <field name="patient" attrs="{'readonly': [('stage', 'in', ['done', 'cancel'])]}"/>
-
                         </group>
                         <notebook>
                             <page string="Treatments">
@@ -42,6 +44,7 @@
                                         <!-- Fields of the 'treatment.module' go here -->
                                         <field name="name" readonly="1"/>
                                         <field name="appointment" readonly="1"/>
+
                                     </tree>
                                 </field>
                             </page>
@@ -92,19 +95,6 @@
             parent="menu_appointment_master"
             sequence="10"
         />
-
-    <menuitem id="menu_sale_root"
-            name="Sale Of Invoices"
-            parent="menu_sale_master"
-            sequence="10"
-        />
-
-
-
-
-
-
-
 
 
 
